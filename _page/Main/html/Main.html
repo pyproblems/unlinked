@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Question 1 - single particle trajectory in magnetic field &#8212; My Jupyter Book</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+    
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Main.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/Main.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Question 1 - single particle trajectory in magnetic field
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#question-2-drifts">
+   Question 2 - drifts
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#question-3-magnetic-mirror">
+   Question 3 - magnetic mirror
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#question-4-optional-extension-magnetic-mirror-continued">
+   Question 4 (optional extension) - magnetic mirror continued
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Question 1 - single particle trajectory in magnetic field</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Question 1 - single particle trajectory in magnetic field
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#question-2-drifts">
+   Question 2 - drifts
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#question-3-magnetic-mirror">
+   Question 3 - magnetic mirror
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#question-4-optional-extension-magnetic-mirror-continued">
+   Question 4 (optional extension) - magnetic mirror continued
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="question-1-single-particle-trajectory-in-magnetic-field">
+<h1>Question 1 - single particle trajectory in magnetic field<a class="headerlink" href="#question-1-single-particle-trajectory-in-magnetic-field" title="Permalink to this headline">¶</a></h1>
+<p>The equation of motion of a particle with charge <span class="math notranslate nohighlight">\(q\)</span> and mass <span class="math notranslate nohighlight">\(m\)</span> in a general electromagnetic field (assuming no other forces) is <span class="math notranslate nohighlight">\(m \frac{d\vec{v}}{dt} = q(\vec{E} + \vec{v} \times \vec{B})\)</span>.</p>
+<ol class="simple">
+<li><p>Plot the trajectory of a deuterium ion with arbitrary initial velocity in a uniform magnetic field <span class="math notranslate nohighlight">\(\vec{B} = B \hat{z}\)</span> with <span class="math notranslate nohighlight">\(B = 3\mathrm{T}\)</span>. Assume <span class="math notranslate nohighlight">\(\vec{E}=0\)</span>.</p></li>
+</ol>
+<div class="alert alert-block alert-info"><b>
+Tip: </b> You may use the following function to update the particle position and velocity from some initial conditions:<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    
+<span class="k">def</span> <span class="nf">particle_pusher</span><span class="p">(</span><span class="n">x_old</span><span class="p">,</span> <span class="n">v_old</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Particle pusher function</span>
+
+<span class="sd">    x_old, v_old, E and B are 3-element numpy arrays,</span>
+<span class="sd">    q and m are the particle charge and mass respectively,</span>
+<span class="sd">    dt is the simulation timestep.</span>
+<span class="sd">    All inputs are in SI units.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Update position</span>
+    <span class="n">x_new</span> <span class="o">=</span> <span class="n">x_old</span> <span class="o">+</span> <span class="n">v</span><span class="o">*</span><span class="n">dt</span>
+
+    <span class="c1"># Update velocity</span>
+    <span class="n">B_mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">q</span> <span class="o">*</span> <span class="n">B_mag</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">B</span> <span class="o">/</span> <span class="n">B_mag</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">v_minus</span> <span class="o">=</span> <span class="n">v_old</span> <span class="o">+</span> <span class="n">q</span> <span class="o">*</span> <span class="n">E</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">/</span> <span class="n">m</span>
+    <span class="n">v_prime</span> <span class="o">=</span> <span class="n">v_minus</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">v_minus</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">v_plus</span> <span class="o">=</span> <span class="n">v_minus</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">v_prime</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">v_new</span> <span class="o">=</span> <span class="n">v_plus</span> <span class="o">+</span> <span class="n">q</span> <span class="o">*</span> <span class="n">E</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">/</span> <span class="n">m</span>
+
+    <span class="k">return</span> <span class="n">x_new</span><span class="p">,</span> <span class="n">v_new</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is based on the Boris algorithm - see <a class="reference external" href="https://www.particleincell.com/2011/vxb-rotation/">here</a> for more information. The input arguments <code class="docutils literal notranslate"><span class="pre">x_old</span></code>, <code class="docutils literal notranslate"><span class="pre">v_old</span></code>, <code class="docutils literal notranslate"><span class="pre">E</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> are expected to be 3-element numpy arrays. You may want to use this function off the shelf, or adapt it to use in a particle class which contains all relevant data and methods for a charged particle moving in an electromagnetic field (this is recommended!).</p>
+<p>To visualise the trajectory, you may wish to use Matplotlib. First, run the cell magic <code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">notebook</span></code> (or <code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">widget</span></code> if working in VS code) to ensure output is rendered correctly in Jupyter. The following code will plot the particle trajectory, assuming <code class="docutils literal notranslate"><span class="pre">trajectory</span></code> is a numpy array of shape <span class="math notranslate nohighlight">\([N_t,3]\)</span>, where <span class="math notranslate nohighlight">\(N_t\)</span> is the number of timesteps simulated:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">animation</span>
+
+<span class="c1"># Create figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">)</span>
+    
+<span class="c1"># Plot the 3D trajectory of the particle</span>
+<span class="c1"># ax.plot(trajectory[:,0],trajectory[:,1],trajectory[:,2])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;z&#39;)
+</pre></div>
+</div>
+<img alt="_images/Main_4_1.png" src="_images/Main_4_1.png" />
+</div>
+</div>
+<ol class="simple">
+<li><p>Check that kinetic energy and magnetic moment of the particle are conserved.</p></li>
+<li><p>Compare the deuterium ion trajectory to an electron orbiting in the same magnetic field. Calculate their Larmor radii.</p></li>
+</ol>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="question-2-drifts">
+<h1>Question 2 - drifts<a class="headerlink" href="#question-2-drifts" title="Permalink to this headline">¶</a></h1>
+<!-- 1. Using the code you wrote for the first question, now plot the trajectory of a deuterium ion in the presence of a uniform magnetic field $\vec{B} = B\hat{z}$ and electric field $\vec{E} = E\hat{y}$ (experiment with different values of $E$ and $B$). Plot also the guiding centre of the particle by rewriting the position as a function of time $t$ as  
+    - $x(t) = x_{gc} + \frac{v_{\perp}}{\omega_c}\sin{(\omega_c t + \phi)}$
+    - $y(t) = y_{gc} + \frac{v_{\perp}}{\omega_c}\sin{(\omega_c t + \phi)}$
+    - $z(t) = z_0 + v_{\parallel}t$
+
+  where $v_{\perp}$ and $v_{\parallel}$ are the perpendicular and parallel components of the particle velocity, $\omega_c$ is the cyclotron frequency and $\phi$ is the gyration phase. 
+  
+  The ExB drift velocity is $\vec{v}_d = \frac{\vec{E}\times \vec{B}}{B^2}$. Does this match your ion's guiding centre velocity in the x-direction?
+  
+2. For magnetic field gradients perpendicular to the field lines, the drift velocity is $\vec{v}_g = \frac{\frac{1}{2}mv_{\perp}^2}{q} \frac{\vec{B} \times \nabla B}{B^3}$ (with $\vec{B}$ evaluated at the guiding centre). Set up a non-uniform magnetic field of the form $\vec{B} = B(y)\hat{z}$, i.e. the field strength varies in the y-direction but always points in the z-direction. Compare the trajectory of your particle with the predicted guiding centre drift.  -->
+<ol class="simple">
+<li><p>Using the code you wrote for the first question, now plot the trajectory of a deuterium ion in the presence of a uniform magnetic field <span class="math notranslate nohighlight">\(\vec{B} = B\hat{z}\)</span> and electric field <span class="math notranslate nohighlight">\(\vec{E} = E\hat{y}\)</span> (experiment with different values of <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(B\)</span>). Calculate the expected <span class="math notranslate nohighlight">\(\vec{E} \times \vec{B}\)</span> drift velocity <span class="math notranslate nohighlight">\(\vec{v}_d\)</span>, and use this to plot the guiding centre alongside the particle trajectory you have computed (remembering <span class="math notranslate nohighlight">\(\vec{v}_{gc} = \vec{v}_{\parallel} + \vec{v}_d\)</span>). Does your ion’s drift match speed and direction to that expected?</p></li>
+</ol>
+  <!-- where $v_{\perp}$ and $v_{\parallel}$ are the perpendicular and parallel components of the particle velocity, $\omega_c$ is the cyclotron frequency and $\phi$ is the gyration phase. 
+  
+  The ExB drift velocity is $\mathbf{v}_d = \frac{\mathbf{E}\times \mathbf{B}}{B^2}$. Does this match your ion's guiding centre velocity in the x-direction? -->
+<ol class="simple">
+<li><p>For magnetic field gradients perpendicular to the field lines, the drift velocity is <span class="math notranslate nohighlight">\(\vec{v}_g = \frac{\frac{1}{2}mv_{\perp}^2}{q} \frac{\vec{B} \times \nabla B}{B^3}\)</span>. Set up a non-uniform magnetic field of the form <span class="math notranslate nohighlight">\(\vec{B} = B(y)\hat{z}\)</span>, where <span class="math notranslate nohighlight">\(B(y) = B_0 + Cy\)</span>, with <span class="math notranslate nohighlight">\(C\)</span> being some constant which defines the magnetic field gradient. Compare the trajectory of your particle with the predicted guiding centre drift.</p></li>
+</ol>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="question-3-magnetic-mirror">
+<h1>Question 3 - magnetic mirror<a class="headerlink" href="#question-3-magnetic-mirror" title="Permalink to this headline">¶</a></h1>
+<p>The magnetic mirror is a device for confining plasma particles, which relies on <span class="math notranslate nohighlight">\(\nabla B\)</span> parallel to <span class="math notranslate nohighlight">\(\vec{B}\)</span>. We will consider one half of such a device (for <span class="math notranslate nohighlight">\(z&gt;0\)</span>), which contains a magnetic field pointing primarily along the z-axis, whose field strength varies in the z direction. We may also assume axisymmetry about the z-axis (i.e. <span class="math notranslate nohighlight">\(B_{\theta} = 0\)</span> for the B-field written in cylindrical coordinates <span class="math notranslate nohighlight">\((B_r,B_{\theta},B_z)\)</span>).</p>
+<p><img alt="mirror" src="Users/dpower/Desktop/mirror.png" /></p>
+<ol class="simple">
+<li><p>As shown in the lectures, an expression for <span class="math notranslate nohighlight">\(B_r\)</span> can be obtained by writing <span class="math notranslate nohighlight">\(\nabla \cdot \vec{B} = 0\)</span> in cylindrical coordinates. This depends on <span class="math notranslate nohighlight">\(\frac{\partial B_z}{\partial z}|_{r_0}\)</span>, which we can assume is constant along <span class="math notranslate nohighlight">\(z\)</span>. Write a function which returns all components of <span class="math notranslate nohighlight">\(\vec{B}\)</span> for a given position, assuming <span class="math notranslate nohighlight">\(B_z\)</span> increases from some <span class="math notranslate nohighlight">\(B_{min}\)</span> at <span class="math notranslate nohighlight">\(z=0\)</span>.</p></li>
+</ol>
+<p>Hint: This may involve converting between cylindrical and Cartesian coordinates, depending on how you choose to implement this. When calculating an angle <span class="math notranslate nohighlight">\(\theta\)</span> between a position on the (x,y) plane and the positive x-axis, you may wish to use the atan2 function, which is provided in numpy as <code class="docutils literal notranslate"><span class="pre">np.arctan2</span></code></p>
+<ol class="simple">
+<li><p>Setting <span class="math notranslate nohighlight">\(B_{min}=1\mathrm{T}\)</span> and <span class="math notranslate nohighlight">\(\frac{\partial B_z}{\partial z}|_{r_0}=15\mathrm{Tm}^{-1}\)</span>, launch a test particle (deuterium ion) from the origin, orbiting about the z-axis, and see if you can observe the particle reverse direction in the z-axis. You may wish to use to following initial conditions</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\vec{v}_0 = 15\times 10^{4} (\hat{x} + \hat{y} + \hat{z})\mathrm{ms}^{-1}\)</span> for the initial velocity</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{r}_0 = (-0.003\hat{x} + 0.003\hat{y})\mathrm{m}\)</span> for the initial position</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vec{E} = 0\)</span></p></li>
+<li><p>timesteps of around 1 nanosecond</p></li>
+</ul>
+</li>
+</ol>
+<p>Hint: It may be easier to see the mirroring effect by plotting the particle trajectory in the x-z or y-z plane</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="question-4-optional-extension-magnetic-mirror-continued">
+<h1>Question 4 (optional extension) - magnetic mirror continued<a class="headerlink" href="#question-4-optional-extension-magnetic-mirror-continued" title="Permalink to this headline">¶</a></h1>
+<p>Now that you have hopefully observed the mirror effect in your computational particle, we will try to consider a slightly more realistic device.</p>
+<ol class="simple">
+<li><p>Write a new function which launches a particle into such a device. Now, we are not worried about storing the full trajectory - we should just track the particle until either a) the particle has passed some point <span class="math notranslate nohighlight">\(z_0\)</span> on the z-axis (this may be the position of a magnetic coil of the device) or b) the particle’s z-component of velocity has reversed direction. The function should return information on whether the particle escaped (condition a) or was trapped (condition b).</p></li>
+<li><p>Let us imagine that the magnetic coils for this device are placed at <span class="math notranslate nohighlight">\(\pm z_0\)</span>. We will continue to consider only half of the device in the positive z domain, checking for particles which can escape past the coil placed at <span class="math notranslate nohighlight">\(z_{0}=1\mathrm{m}\)</span> . Modify the B-field so that <span class="math notranslate nohighlight">\(\frac{\partial B_z}{\partial z}|_{r_0}=1\mathrm{Tm}^{-1}\)</span> (keeping <span class="math notranslate nohighlight">\(B_{min}=1\mathrm{T}\)</span>). Now, vary the balance of perpendicular and parallel velocity in your particle’s initial condition, keeping the magnitude <span class="math notranslate nohighlight">\(v_0\)</span> the same, <span class="math notranslate nohighlight">\(v_0=2.5\times 10^5\mathrm{ms}^{-1}\)</span>. Launch a number of particles from the origin, and make a record of which ones are trapped and which ones escape (as well as their initial <span class="math notranslate nohighlight">\(v_{\perp,0}\)</span> and <span class="math notranslate nohighlight">\(v_{\parallel,0}\)</span>).</p></li>
+<li><p>Produce a plot of the particles in the <span class="math notranslate nohighlight">\(v_{\parallel,0},v_{\perp,0}\)</span> plane, using their initial values, showing which ones are trapped and which ones escape. Estimate (by eye is sufficient) the cutoff value for <span class="math notranslate nohighlight">\(v_{\parallel,0}^2/v_{\perp,0}^2\)</span> which determines whether a particle is trapped. Does this match the formula derived in the lectures, <span class="math notranslate nohighlight">\(v_{\parallel,0}^2/v_{\perp,0}^2 &lt; (B_{z_0}/B_{min} - 1)\)</span>, where <span class="math notranslate nohighlight">\(B_{z_0}\)</span> is the B-field strength at <span class="math notranslate nohighlight">\(z_0\)</span>?</p></li>
+</ol>
+<p>Note: In part 3, only a single <span class="math notranslate nohighlight">\(v_0\)</span> contour in the <span class="math notranslate nohighlight">\(v_{\parallel,0},v_{\perp,0}\)</span> plane is explored, but you should be able to see the same behaviour for different values of <span class="math notranslate nohighlight">\(v_0\)</span>. If you want, you could try varying <span class="math notranslate nohighlight">\(v_0\)</span> as well to confirm this.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
